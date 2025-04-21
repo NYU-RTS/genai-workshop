@@ -1,7 +1,7 @@
 [workspace]
 channels = ["conda-forge"]
 name = "r_llm"
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64","linux-64"]
 version = "0.1.0"
 
 [tasks]
@@ -10,3 +10,4 @@ version = "0.1.0"
 r = ">=4.4,<4.5"
 jupyterlab = ">=4.4.0,<5"
 r-irkernel = ">=1.3.2,<2"
+imagemagick = ">=7.1.1_47,<8"
