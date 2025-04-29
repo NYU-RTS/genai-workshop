@@ -1,9 +1,3 @@
-# Install and load required packages
-if (!require("text2vec")) install.packages("text2vec")
-if (!require("tm")) install.packages("tm")
-if (!require("proxy")) install.packages("proxy")
-if (!require("stringr")) install.packages("stringr")
-
 library(text2vec)
 library(tm)
 library(proxy)
