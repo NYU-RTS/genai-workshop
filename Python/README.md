@@ -14,6 +14,13 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ```
 For alternate methods, please refer to the uv installation instructions [here](https://docs.astral.sh/uv/getting-started/installation/).
 
+### Environment variables
+
+All scripts use the following environment variables:
+- `PORTKEY_API_KEY`
+- `PORTKEY_VIRTUAL_KEY`
+- `LLM_MODEL`
+
 
 ## Running the scripts
 
