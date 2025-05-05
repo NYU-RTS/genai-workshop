@@ -8,3 +8,12 @@ dependencies = [
     "attrs>=25.3.0",
     "portkey-ai>=1.12.2",
 ]
+
+[tool.ruff]
+# Allow lines to be as long as 120.
+line-length = 120
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.8",
+]

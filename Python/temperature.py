@@ -21,16 +21,12 @@ async def get_completion(client: AsyncPortkey, llm_model: str, temperature: floa
     return completion
 
 
-async def get_responses(
-    client: AsyncPortkey, llm_model: str, temperature: float, num_responses: int
-):
+async def get_responses(client: AsyncPortkey, llm_model: str, temperature: float, num_responses: int):
     try:
         tasks = []
         async with asyncio.TaskGroup() as tg:
             for _ in range(num_responses):
-                tasks.append(
-                    tg.create_task(get_completion(client, llm_model, temperature))
-                )
+                tasks.append(tg.create_task(get_completion(client, llm_model, temperature)))
         for idx in range(num_responses):
             response = tasks[idx].result().choices[0]["message"]["content"]
             print(f"response number {idx} is {response}")
@@ -39,8 +35,6 @@ async def get_responses(
 
 
 if __name__ == "__main__":
-    print("Running now!")
-
     portkey_client_config = utils.client_config(
         api_key=os.environ["PORTKEY_API_KEY"],
         virtual_key=os.environ["PORTKEY_VIRTUAL_KEY"],
@@ -54,11 +48,7 @@ if __name__ == "__main__":
     )
     parser = argparse.ArgumentParser()
     parser.add_argument("temperature", help="temperature", type=float, default=2.0)
-    parser.add_argument(
-        "n", help="number of completions to generate", type=int, default=10
-    )
+    parser.add_argument("n", help="number of completions to generate", type=int, default=10)
     args = parser.parse_args()
 
-    asyncio.run(
-        get_responses(client, portkey_client_config.llm_model, args.temperature, args.n)
-    )
+    asyncio.run(get_responses(client, portkey_client_config.llm_model, args.temperature, args.n))
