@@ -66,45 +66,49 @@ rownames(embeddings) <- names(processed_docs)
 # Display the structure of our embedding database
 cat("Embedding Database Structure:\n")
 print(dim(embeddings))
-cat("Each document is represented by a", ncol(embeddings), "dimensional vector\n\n")
+cat(
+  "Each document is represented by a",
+  ncol(embeddings),
+  "dimensional vector\n\n"
+)
 
 # 6. RAG function to retrieve and generate using cosine distance
 retrieve_documents <- function(query, embeddings, documents, top_n = 3) {
   # Preprocess the query
   processed_query <- preprocess_text(query)
-  
+
   # Tokenize
   query_tokens <- space_tokenizer(processed_query)
-  
+
   # Create iterator and convert to DTM
   query_it <- itoken(query_tokens, ids = c("query"))
   query_dtm <- create_dtm(query_it, vectorizer)
-  
+
   # Transform to TF-IDF
   query_tfidf <- transform(query_dtm, tfidf)
-  
+
   # Convert to matrix
   query_vector <- as.matrix(query_tfidf)
-  
+
   # Calculate cosine distance
   distances <- proxy::dist(query_vector, embeddings, method = "cosine")
-  
+
   # Convert to a more manageable format
   dist_df <- data.frame(
     doc_id = colnames(distances),
     distance = as.numeric(distances),
     stringsAsFactors = FALSE
   )
-  
+
   # Sort by distance (ascending - lower distance means more similar)
   dist_df <- dist_df[order(dist_df$distance), ]
-  
+
   # Get top N results
   top_results <- head(dist_df, top_n)
-  
+
   # Add the actual document text
   top_results$text <- documents[top_results$doc_id]
-  
+
   return(top_results)
 }
 
@@ -118,20 +122,20 @@ example_queries <- c(
 for (query in example_queries) {
   cat("\n\nQuery:", query, "\n")
   cat("Finding most similar documents...\n")
-  
+
   results <- retrieve_documents(query, embeddings, documents)
-  
+
   cat("\nTop", nrow(results), "most relevant documents:\n")
   for (i in 1:nrow(results)) {
     cat("\n", i, ". Document:", results$doc_id[i], "\n")
     cat("   Cosine Distance:", round(results$distance, 4), "\n")
     cat("   Text:", results$text[i], "\n")
   }
-  
+
   # Simulate a RAG response (in a real application, this would use an LLM)
   cat("\nSimulated RAG Response:\n")
   cat("Based on the retrieved documents, here's a response to your query:\n")
-  
+
   # For this example, we'll just concatenate the top documents
   retrieved_text <- paste(results$text, collapse = " ")
   cat("\"", substr(retrieved_text, 1, 200), "...\"\n")

@@ -12,14 +12,19 @@ if (Sys.getenv("LLM_MODEL") == "") {
   LLM_MODEL <- Sys.getenv("LLM_MODEL")
 }
 
-chat  <- chat_openai(
-  base_url="https://ai-gateway.apps.cloud.rt.nyu.edu/v1/",
-  api_key=API_KEY,
-  model=LLM_MODEL)
+chat <- chat_openai(
+  base_url = "https://ai-gateway.apps.cloud.rt.nyu.edu/v1/",
+  api_key = API_KEY,
+  model = LLM_MODEL
+)
 
 PWD <- getwd()
 
 chat$chat(
   "What do you see in these images?",
-  content_image_file(file.path(PWD,"images","Gfp-wisconsin-madison-the-nature-boardwalk.jpg"))
+  content_image_file(file.path(
+    PWD,
+    "images",
+    "Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+  ))
 )
