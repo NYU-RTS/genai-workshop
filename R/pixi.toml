@@ -7,6 +7,6 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-r = ">=4.4,<4.5"
-imagemagick = ">=7.1.1_47,<8"
-libcurl = ">=8.13.0,<9"
+r = ">=4.5,<4.6"
+imagemagick = ">=7.1.2_9,<8"
+libcurl = ">=8.17.0,<9"
