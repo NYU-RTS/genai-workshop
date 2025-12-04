@@ -37,14 +37,12 @@ async def get_responses(client: AsyncPortkey, llm_model: str, temperature: float
 if __name__ == "__main__":
     portkey_client_config = utils.client_config(
         api_key=os.environ["PORTKEY_API_KEY"],
-        virtual_key=os.environ["PORTKEY_VIRTUAL_KEY"],
         llm_model=os.environ["LLM_MODEL"],
     )
 
     client = AsyncPortkey(
         base_url=portkey_client_config.gateway_url,
         api_key=portkey_client_config.api_key,
-        virtual_key=portkey_client_config.virtual_key,
     )
     parser = argparse.ArgumentParser()
     parser.add_argument("temperature", help="temperature", type=float, default=2.0)
