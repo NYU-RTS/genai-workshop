@@ -1,7 +1,7 @@
 library(ellmer)
 
 if (Sys.getenv("LLM_MODEL") == "") {
-  stop(paste("Error: Environment variable", API_KEY, "is not set!"))
+  stop(paste("Error: Environment variable", LLM_MODEL, "is not set!"))
 } else {
   LLM_MODEL <- Sys.getenv("LLM_MODEL")
 }
