@@ -8,5 +8,5 @@ version = "0.1.0"
 
 [dependencies]
 r = ">=4.5,<4.6"
-imagemagick = ">=7.1.2_9,<8"
-libcurl = ">=8.17.0,<9"
+imagemagick = ">=7.1.2_17,<8"
+libcurl = ">=8.19.0,<9"
